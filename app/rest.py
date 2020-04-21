@@ -4,6 +4,7 @@ from app import app
 def home():
 	#create home screen
 
+
 @app.route('/api/getlays')
 def getlays():
 	#create getlays
