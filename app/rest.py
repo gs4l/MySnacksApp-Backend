@@ -35,3 +35,11 @@ def logout():
 	uname = request.form['name']
 	result = verify_uname_logout(uname)
 	return jsonify(result)
+
+# @app.route('/api/check_login', methods=['POST'])
+# def chk_login():
+# 	user_id = request.form['id']
+# 	result = check_login(user_id)
+# 	if result == LOGGED_IN:
+# 		return redirect(url_for('home', id=user_id))
+# 	return redirect(url_for('login'))

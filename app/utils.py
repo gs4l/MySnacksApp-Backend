@@ -85,3 +85,16 @@ def verify_uname_logout(uname):
 	except:
 		db.session.rollback()
 	return result
+
+# def check_login(id):
+# 	result = LOGGED_OUT
+# 	try:
+# 		user = Users.query.get(id)
+# 		if user.login is True:
+# 			result = LOGGED_IN
+# 		else:
+# 			result = LOGGED_OUT
+# 		db.session.commit()
+# 	except:
+# 		db.session.rollback()
+# 	return result

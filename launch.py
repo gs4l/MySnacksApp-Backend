@@ -1,3 +1,4 @@
 from app import app
+from app.config import BASE_URL
 
-app.run(host='0.0.0.0', port= 80, debug= True)
+app.run(host=BASE_URL, port= 80, debug= True)
