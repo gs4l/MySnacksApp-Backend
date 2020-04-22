@@ -74,3 +74,14 @@ def verify_uname_passwd(uname, passwd):
 	except:
 		db.session.rollback()
 	return result
+
+def verify_uname_logout(uname):
+	result = {}
+	try:
+		user = Users.query.filter_by(name=uname).first()
+		user.login = False
+		db.session.commit()
+		result['message'] = 'Logout SUCCESS'
+	except:
+		db.session.rollback()
+	return result

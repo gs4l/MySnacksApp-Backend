@@ -29,3 +29,9 @@ def login():
 	passwd = user_data['password']
 	result = verify_uname_passwd(uname, passwd)
 	return jsonify(result)
+
+@app.route('/api/logout', methods=['POST'])
+def logout():
+	uname = request.form['name']
+	result = verify_uname_logout(uname)
+	return jsonify(result)
