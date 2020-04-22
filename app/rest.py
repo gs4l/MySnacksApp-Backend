@@ -19,11 +19,10 @@ def getlays():
 @app.route('/api/givelays')
 def givelays():
 	otp = request.args.get('otp')
-	query = 'update users set available=available-1 where otp='+otp+'; update items set quantity=quantity-1;'
-	nonret_query(query)
-	return '0'
+	result = give_lays(otp)
+	return jsonify(result)
 
-@app.route('/api/verify')
-def verify():
-	#create verify
+@app.route('/api/login')
+def login():
+	#create login
 	return '0'
