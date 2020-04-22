@@ -22,7 +22,10 @@ def givelays():
 	result = give_lays(otp)
 	return jsonify(result)
 
-@app.route('/api/login')
+@app.route('/api/login', methods=['POST'])
 def login():
-	#create login
-	return '0'
+	user_data = request.form 
+	uname = user_data['name']
+	passwd = user_data['password']
+	result = verify_uname_passwd(uname, passwd)
+	return jsonify(result)
