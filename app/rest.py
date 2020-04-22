@@ -1,24 +1,26 @@
 from app import app, db
 from flask import request, jsonify
 from app.models import *
+from app.utils import *
 
 @app.route('/api/home')
 def home():
 	user_id = request.args.get('id')
-	query = 'select * from users where id='+user_id+';'
-	result = db.session.execute(query)
-	for r in result:
-		r_dict = dict(r.items())
-	return jsonify(r_dict)
+	result = get_home_data(user_id)
+	return jsonify(result)
 
 @app.route('/api/getlays')
 def getlays():
-	#create getlays
-	return '0'
+	user_id = request.args.get('id')
+	otp = update_otp(user_id)
+	result = {'otp': otp}
+	return jsonify(result)
 
 @app.route('/api/givelays')
 def givelays():
-	#create givelays
+	otp = request.args.get('otp')
+	query = 'update users set available=available-1 where otp='+otp+'; update items set quantity=quantity-1;'
+	nonret_query(query)
 	return '0'
 
 @app.route('/api/verify')
