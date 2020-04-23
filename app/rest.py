@@ -49,6 +49,14 @@ def itemlist():
 	result = item_list()
 	return jsonify(result)
 
+@app.route('/api/additem', methods=['POST'])
+def additem():
+	item_data = request.form
+	item_name = item_data['name']
+	item_qty = item_data['quantity']
+	result = add_item(item_name, item_qty)
+	return jsonify(result)
+
 # @app.route('/api/check_login', methods=['POST'])
 # def chk_login():
 # 	user_id = request.form['id']
