@@ -36,6 +36,19 @@ def logout():
 	result = verify_uname_logout(uname)
 	return jsonify(result)
 
+@app.route('/api/updateitem', methods=['POST'])
+def update():
+	item_data = request.form
+	item_id = item_data['id']
+	item_qty = item_data['quantity']
+	result = update_item(item_id, item_qty)
+	return jsonify(result)
+
+@app.route('/api/itemlist')
+def itemlist():
+	result = item_list()
+	return jsonify(result)
+
 # @app.route('/api/check_login', methods=['POST'])
 # def chk_login():
 # 	user_id = request.form['id']

@@ -86,6 +86,33 @@ def verify_uname_logout(uname):
 		db.session.rollback()
 	return result
 
+def update_item(id, quantity):
+	result = {}
+	try:
+		item = Items.query.get(id)
+		item.quantity = item.quantity + int(quantity)
+		db.session.commit()
+		result['message'] = 'Item updated SUCCESS'
+	except:
+		db.session.rollback()
+	return result
+
+def item_list():
+	result = {}
+	data = []
+	try:
+		items = Items.query.all()
+		for i in items:
+			item = {}
+			item['id'] = i.id
+			item['name'] = i.name
+			data.append(item)
+		result['data'] = data
+		db.session.commit()
+	except:
+		db.session.rollback()
+	return result
+
 # def check_login(id):
 # 	result = LOGGED_OUT
 # 	try:
