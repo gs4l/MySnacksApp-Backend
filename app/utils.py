@@ -115,15 +115,15 @@ def item_list():
 
 def add_item(name, quantity):
 	result = {}
-	# try:
-	item = Items.query.order_by(Items.id.desc()).first()
-	id = item.id + 1
-	new_item = Items(id, name, int(quantity))
-	db.session.add(new_item)
-	db.session.commit()
-	result['message'] = 'Item added SUCCESS'
-	# except:
-	# 	db.session.rollback()
+	try:
+		item = Items.query.order_by(Items.id.desc()).first()
+		id = item.id + 1
+		new_item = Items(id, name, int(quantity))
+		db.session.add(new_item)
+		db.session.commit()
+		result['message'] = 'Item added SUCCESS'
+	except:
+		db.session.rollback()
 	return result
 
 # def check_login(id):
