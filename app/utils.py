@@ -26,7 +26,7 @@ def get_home_data(id):
 		db.session.rollback()
 	return result
 
-def give_lays(otp):
+def give_snack(otp):
 	result = {}
 	try:
 		user = Users.query.filter_by(otp=otp).first()

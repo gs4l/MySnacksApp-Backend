@@ -9,17 +9,17 @@ def home():
 	result = get_home_data(user_id)
 	return jsonify(result)
 
-@app.route('/api/getlays')
-def getlays():
+@app.route('/api/getsnack')
+def getsnack():
 	user_id = request.args.get('id')
 	otp = update_otp(user_id)
 	result = {'otp': otp}
 	return jsonify(result)
 
-@app.route('/api/givelays')
-def givelays():
+@app.route('/api/givesnack')
+def givesnack():
 	otp = request.args.get('otp')
-	result = give_lays(otp)
+	result = give_snack(otp)
 	return jsonify(result)
 
 @app.route('/api/login', methods=['POST'])
