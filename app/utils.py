@@ -33,21 +33,21 @@ def give_lays(otp):
 		item = Items.query.filter_by(id=ITEM_LAYS).first()
 		if user is None:
 			result['message'] = 'Wrong OTP'
-			result['code'] = 1
+			result['code'] = CODE_WRONG_VALUE
 		elif item is None:
 			result['message'] = 'Something went Wrong'
-			result['code'] = 2
+			result['code'] = CODE_SOMETHING_WENT_WRONG
 		elif item.quantity == 0:
 			result['message'] = 'Item currently not available'
-			result['code'] = 2
+			result['code'] = CODE_SOMETHING_WENT_WRONG
 		elif user.available == 0:
 			result['message'] = 'Today user limit reached'
-			result['code'] = 2
+			result['code'] = CODE_SOMETHING_WENT_WRONG
 		else:
 			user.available = user.available - 1
 			item.quantity = item.quantity - 1
 			result['message'] = 'SUCCESS Allowed to take one unit of item'
-			result['code'] = 2
+			result['code'] = CODE_SUCCESS
 		db.session.commit()
 	except:
 		db.session.rollback()
@@ -59,17 +59,17 @@ def verify_uname_passwd(uname, passwd):
 		user = Users.query.filter_by(name=uname).first()
 		if user is None:
 			result['message'] = 'User not registered'
-			result['code'] = 1
+			result['code'] = CODE_USER_NOT_REGISTERED
 		elif user.password == passwd:
 			user.login = True
 			result['message'] = 'Login SUCCESS'
-			result['code'] = 2
+			result['code'] = CODE_SUCCESS
 		elif user.password != passwd:
 			result['message'] = 'Wrong Password'
-			result['code'] = 3
+			result['code'] = CODE_WRONG_VALUE
 		else:
 			result['message'] = 'Something went Wrong'
-			result['code'] = 4
+			result['code'] = CODE_SOMETHING_WENT_WRONG
 		db.session.commit()
 	except:
 		db.session.rollback()
@@ -82,6 +82,7 @@ def verify_uname_logout(uname):
 		user.login = False
 		db.session.commit()
 		result['message'] = 'Logout SUCCESS'
+		result['code'] = CODE_SUCCESS
 	except:
 		db.session.rollback()
 	return result
@@ -93,6 +94,7 @@ def update_item(id, quantity):
 		item.quantity = item.quantity + int(quantity)
 		db.session.commit()
 		result['message'] = 'Item updated SUCCESS'
+		result['code'] = CODE_SUCCESS
 	except:
 		db.session.rollback()
 	return result
@@ -122,6 +124,7 @@ def add_item(name, quantity):
 		db.session.add(new_item)
 		db.session.commit()
 		result['message'] = 'Item added SUCCESS'
+		result['code'] = CODE_SUCCESS
 	except:
 		db.session.rollback()
 	return result
